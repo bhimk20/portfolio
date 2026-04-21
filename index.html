@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bhim | Full Stack Engineer</title>
+  <meta name="description" content="Portfolio website for Bhim, Full Stack Engineer." />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #121933;
+      --panel-2: #182142;
+      --text: #eef2ff;
+      --muted: #b8c1ec;
+      --accent: #7c9cff;
+      --accent-2: #66e3c4;
+      --border: rgba(255,255,255,0.08);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --max: 1100px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124,156,255,0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(102,227,196,0.12), transparent 22%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(11,16,32,0.75);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+    }
+
+    .brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus { color: var(--text); }
+
+    .hero {
+      padding: 5.5rem 0 4rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.9fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--accent-2);
+      background: rgba(255,255,255,0.03);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 6vw, 4.8rem);
+      line-height: 1.05;
+      margin: 0 0 1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 62ch;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.9rem 1.2rem;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      font-weight: 600;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #9b7cff);
+      color: white;
+      border-color: transparent;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+    }
+
+    .profile-box {
+      aspect-ratio: 1 / 1;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(124,156,255,0.22), rgba(102,227,196,0.12));
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      font-size: 4rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1rem;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 0.25rem;
+    }
+
+    section {
+      padding: 2rem 0 1rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin: 0 0 0.5rem;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      margin: 0 0 1.5rem;
+      max-width: 65ch;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .tag {
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(124,156,255,0.12);
+      border: 1px solid rgba(124,156,255,0.25);
+      color: #dbe3ff;
+      font-size: 0.85rem;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1rem;
+      font-weight: 600;
+      color: var(--accent-2);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 1rem;
+      align-items: start;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .timeline-item:last-child { border-bottom: none; }
+
+    .timeline-date {
+      color: var(--accent-2);
+      font-weight: 600;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .skill {
+      padding: 0.75rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+    }
+
+    .contact {
+      padding-bottom: 5rem;
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      padding: 1.25rem 0 2rem;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .contact-box,
+      .timeline-item,
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-date {
+        margin-bottom: -0.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#top" class="brand">Bhim</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Full Stack Engineer • Available for opportunities</div>
+        <h1>Building reliable web products with clean frontend and solid backend systems.</h1>
+        <p>
+          I’m Bhim, a full stack engineer focused on creating fast, scalable, and user-friendly applications.
+          I work across modern frontend frameworks, backend services, APIs, databases, and deployment workflows.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#projects">View Projects</a>
+          <a class="btn btn-secondary" href="mailto:your.email@example.com">Contact Me</a>
+          <a class="btn btn-secondary" href="https://github.com/yourusername" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="profile-box">B</div>
+        <div class="stats">
+          <div class="stat">
+            <strong>3+</strong>
+            <span>Highlighted Projects</span>
+          </div>
+          <div class="stat">
+            <strong>Full Stack</strong>
+            <span>Frontend to Backend</span>
+          </div>
+          <div class="stat">
+            <strong>Open to Work</strong>
+            <span>Freelance or full-time</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <p class="section-copy">
+          I enjoy turning ideas into production-ready software. My work usually involves building responsive user interfaces,
+          designing APIs, integrating databases, and shipping features with performance and maintainability in mind.
+        </p>
+        <div class="card-grid">
+          <article class="card">
+            <h3>Frontend</h3>
+            <p>Responsive interfaces using React, Next.js, TypeScript, modern CSS, and reusable component systems.</p>
+          </article>
+          <article class="card">
+            <h3>Backend</h3>
+            <p>APIs, authentication, business logic, and integrations using Node.js, Express, and scalable service patterns.</p>
+          </article>
+          <article class="card">
+            <h3>Delivery</h3>
+            <p>Version control, testing, deployment, and practical engineering workflows that keep projects stable and maintainable.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-copy">Replace these sample projects with your own work, live demos, and GitHub links.</p>
+        <div class="card-grid">
+          <article class="card">
+            <h3>E-Commerce Platform</h3>
+            <p>A full stack shopping platform with product listings, authentication, cart flow, and order management.</p>
+            <div class="project-tags">
+              <span class="tag">React</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">MongoDB</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/yourusername/project-one" target="_blank" rel="noreferrer">Code</a>
+              <a href="#" target="_blank" rel="noreferrer">Live Demo</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Task Management App</h3>
+            <p>A productivity app with user accounts, dashboards, filtering, and real-time status tracking for tasks.</p>
+            <div class="project-tags">
+              <span class="tag">TypeScript</span>
+              <span class="tag">Express</span>
+              <span class="tag">PostgreSQL</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/yourusername/project-two" target="_blank" rel="noreferrer">Code</a>
+              <a href="#" target="_blank" rel="noreferrer">Live Demo</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Portfolio CMS</h3>
+            <p>A content-managed personal site with editable project entries, blog-ready structure, and deployment automation.</p>
+            <div class="project-tags">
+              <span class="tag">Next.js</span>
+              <span class="tag">API</span>
+              <span class="tag">GitHub Actions</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/yourusername/project-three" target="_blank" rel="noreferrer">Code</a>
+              <a href="#" target="_blank" rel="noreferrer">Live Demo</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <h2 class="section-title">Experience</h2>
+        <p class="section-copy">Use this section for jobs, internships, freelance work, or major engineering contributions.</p>
+        <div class="card timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">2024 — Present</div>
+            <div>
+              <h3>Full Stack Engineer</h3>
+              <p>Built and maintained web applications across frontend and backend layers, focusing on performance, usability, and API integrations.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2022 — 2024</div>
+            <div>
+              <h3>Software Developer</h3>
+              <p>Delivered features, fixed production issues, improved code quality, and collaborated with cross-functional teams on product releases.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Earlier</div>
+            <div>
+              <h3>Projects & Learning</h3>
+              <p>Developed independent applications, explored new tools, and strengthened core skills in frontend, backend, and deployment workflows.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <p class="section-copy">Update this with the technologies you want recruiters or clients to notice first.</p>
+        <div class="skills">
+          <span class="skill">JavaScript</span>
+          <span class="skill">TypeScript</span>
+          <span class="skill">React</span>
+          <span class="skill">Next.js</span>
+          <span class="skill">Node.js</span>
+          <span class="skill">Express</span>
+          <span class="skill">MongoDB</span>
+          <span class="skill">PostgreSQL</span>
+          <span class="skill">REST APIs</span>
+          <span class="skill">Git & GitHub</span>
+          <span class="skill">HTML & CSS</span>
+          <span class="skill">Deployment</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <p class="section-copy">Make it easy for people to reach you. Add your real email, LinkedIn, GitHub, and resume link here.</p>
+        <div class="contact-box">
+          <div class="card">
+            <h3>Let’s work together</h3>
+            <p>
+              I’m open to full stack engineering roles, freelance projects, and collaboration opportunities.
+              For work inquiries, send me an email or connect with me on LinkedIn.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="mailto:your.email@example.com">your.email@example.com</a>
+              <a class="btn btn-secondary" href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Quick Links</h3>
+            <p><strong>GitHub:</strong> github.com/yourusername</p>
+            <p><strong>Resume:</strong> Add resume PDF link</p>
+            <p><strong>Location:</strong> Add city/country if you want</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © <span id="year"></span> Bhim. Built with HTML and CSS. Hosted on GitHub Pages.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
